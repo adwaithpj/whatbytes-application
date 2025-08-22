@@ -20,6 +20,52 @@ A comprehensive healthcare management system built with Django REST Framework, f
 
 ## Installation
 
+### 🐳 Option 1: Docker (Recommended for Development)
+
+Docker provides the easiest way to get started with the Healthcare Backend API. It automatically sets up PostgreSQL database and all dependencies.
+
+1. **Prerequisites**
+
+   - Install [Docker](https://www.docker.com/get-started) and Docker Compose
+
+2. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/adwaithpj/whatbytes-application.git
+   cd healthcare-backend
+   ```
+
+3. **Start with Docker**
+
+   ```bash
+   # Build and start all services (Django + PostgreSQL + pgAdmin)
+   docker-compose up --build
+
+   # Or run in background
+   docker-compose up --build -d
+   ```
+
+4. **Access your application**
+
+   - **API**: http://localhost:8000
+   - **Admin Panel**: http://localhost:8000/admin/
+     - Email: `admin@healthcare.com`
+     - Password: `admin123`
+   - **pgAdmin** (Database UI): http://localhost:5050
+     - Email: `admin@healthcare.com`
+     - Password: `admin123`
+
+5. **That's it!** 🎉
+   The application automatically:
+   - Sets up PostgreSQL database
+   - Runs all migrations
+   - Creates a superuser account
+   - Starts the Django development server
+
+### ⚙️ Option 2: Manual Installation
+
+If you prefer to set up the environment manually:
+
 1. **Clone the repository**
 
    ```bash
@@ -31,7 +77,7 @@ A comprehensive healthcare management system built with Django REST Framework, f
 
    ```bash
    python -m venv whatbytes
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   source whatbytes/bin/activate  # On Windows: whatbytes\Scripts\activate
    ```
 
 3. **Install dependencies**
@@ -41,15 +87,18 @@ A comprehensive healthcare management system built with Django REST Framework, f
    ```
 
 4. **Environment Setup**
-   Create a `.env` file in the project root with the following variables:
+   Create a `.env` file in the project root:
 
    ```env
-   # Database Configuration
-   DB_NAME=postgres
-   DB_USER=postgres
-   DB_PASSWORD=your_password
-   DB_HOST=localhost
-   DB_PORT=5432
+   # Option 1: Use full PostgreSQL URL (Recommended)
+   DATABASE_URL=postgresql://postgres:your_password@localhost:5432/healthcare_db
+
+   # Option 2: Individual database variables
+   # DB_NAME=healthcare_db
+   # DB_USER=postgres
+   # DB_PASSWORD=your_password
+   # DB_HOST=localhost
+   # DB_PORT=5432
 
    # Django Configuration
    SECRET_KEY=your-secret-key-here
@@ -59,7 +108,8 @@ A comprehensive healthcare management system built with Django REST Framework, f
 
 5. **Database Setup**
 
-   - Create PostgreSQL database named `healthcare_db`
+   - Install and start PostgreSQL
+   - Create database named `healthcare_db`
    - Run migrations:
 
    ```bash
@@ -77,6 +127,67 @@ A comprehensive healthcare management system built with Django REST Framework, f
    ```bash
    python manage.py runserver
    ```
+
+## 🐳 Docker Commands
+
+### Common Docker Operations
+
+```bash
+# Start services
+docker-compose up                    # Start and view logs
+docker-compose up -d                 # Start in background
+docker-compose up --build            # Rebuild and start
+
+# Stop services
+docker-compose down                  # Stop all services
+docker-compose down -v              # Stop and remove volumes (⚠️ Deletes database data)
+
+# View logs
+docker-compose logs                  # View all logs
+docker-compose logs web              # View Django app logs
+docker-compose logs db               # View PostgreSQL logs
+docker-compose logs -f               # Follow logs in real-time
+
+# Database operations
+docker-compose exec web python manage.py migrate                # Run migrations
+docker-compose exec web python manage.py createsuperuser        # Create additional superuser
+docker-compose exec web python manage.py shell                  # Open Django shell
+docker-compose exec db psql -U postgres -d healthcare_db        # Connect to PostgreSQL directly
+
+# Container management
+docker-compose ps                    # View running containers
+docker-compose restart web           # Restart Django app
+docker-compose build web            # Rebuild Django app container
+```
+
+### Docker Troubleshooting
+
+**Port conflicts:**
+
+```bash
+# If port 8000 is already in use, modify docker-compose.yml:
+ports:
+  - "8001:8000"  # Use port 8001 instead
+```
+
+**Database connection issues:**
+
+```bash
+# Check if database is running
+docker-compose ps
+docker-compose logs db
+
+# Reset database completely
+docker-compose down -v
+docker-compose up --build
+```
+
+**View application in real-time:**
+
+```bash
+# The Docker setup includes volume mounting, so changes to your code
+# will automatically reload the Django development server
+```
 
 ## API Endpoints
 
@@ -258,7 +369,14 @@ healthcare_backend/
 ├── patients/              # Patient management app
 ├── doctors/               # Doctor management app
 ├── mappings/              # Patient-doctor mapping app
+├── Dockerfile             # Docker container definition
+├── docker-compose.yml     # Multi-service Docker orchestration
+├── entrypoint.sh          # Docker container startup script
+├── init-db.sql           # PostgreSQL initialization script
+├── .dockerignore         # Files to exclude from Docker build
+├── docker.env            # Docker environment configuration template
 ├── requirements.txt       # Python dependencies
+├── DOCKER_README.md       # Detailed Docker setup guide
 └── README.md             # This file
 ```
 
