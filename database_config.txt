@@ -1,0 +1,24 @@
+# PostgreSQL Configuration for Supabase
+# Create a .env file in your project root with these environment variables:
+
+# OPTION 1: Use the full PostgreSQL URL (RECOMMENDED)
+DATABASE_URL=postgresql://postgres:[YOUR-PASSWORD]@db.zshrugoaphcqpyugmtrv.supabase.co:5432/postgres
+
+# OPTION 2: Use individual environment variables (alternative)
+# DB_NAME=postgres
+# DB_USER=postgres
+# DB_PASSWORD=[YOUR-PASSWORD]
+# DB_HOST=db.zshrugoaphcqpyugmtrv.supabase.co
+# DB_PORT=5432
+
+# Other configurations
+SECRET_KEY=django-insecure-f**#pye)l#t8tc#0p0j)r===$)($jf!^5v&5r_vnklr@hyjo4s
+DEBUG=True
+ALLOWED_HOSTS=localhost,127.0.0.1
+
+# Instructions:
+# 1. Create a .env file in your project root directory
+# 2. Choose OPTION 1 (recommended) or OPTION 2 above
+# 3. For OPTION 1: Copy the DATABASE_URL line and replace [YOUR-PASSWORD] with your actual Supabase password
+# 4. For OPTION 2: Uncomment the individual DB_* variables and replace [YOUR-PASSWORD]
+# 5. The Django settings.py now supports both configuration methods with priority: DATABASE_URL > individual vars > SQLite fallback

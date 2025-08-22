@@ -1,0 +1,418 @@
+{
+	"info": {
+		"_postman_id": "3dfb147e-051b-4536-9dc6-cecca56c4b62",
+		"name": "WhatBytes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33734792"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Register account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"email\": \"john.doe@example.com\",\r\n    \"username\": \"johndoe\",\r\n    \"password\": \"SecurePass123!\",\r\n    \"password_confirm\": \"SecurePass123!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/auth/register/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@healthcare.com\",\r\n    \"password\": \"admin@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/auth/login/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patient",
+			"item": [
+				{
+					"name": "Create a patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Smith\",\r\n    \"email\": \"jane.smith@example.com\",\r\n    \"phone\": \"+1-555-0123\",\r\n    \"date_of_birth\": \"1990-05-15\",\r\n    \"gender\": \"F\",\r\n    \"address\": \"123 Main Street, Anytown, ST 12345\",\r\n    \"medical_history\": \"No known allergies. Previous surgery: appendectomy in 2015.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/patients/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"patients",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a patient list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/patients/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"patients",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get specific patient",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jane Smith\",\r\n    \"email\": \"jane.smith@example.com\",\r\n    \"phone\": \"+1-555-0123\",\r\n    \"date_of_birth\": \"1990-05-15\",\r\n    \"gender\": \"F\",\r\n    \"address\": \"123 Main Street, Anytown, ST 12345\",\r\n    \"medical_history\": \"No known allergies. Previous surgery: appendectomy in 2015.\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/patients/1/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"patients",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete patient",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/patients/1/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"patients",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doctor",
+			"item": [
+				{
+					"name": "Create a Doctor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dr. Adwaith\",\r\n    \"email\": \"dr.adwaith@hospital.com\",\r\n    \"phone\": \"+1-555-0456\",\r\n    \"specialization\": \"Neurologist\",\r\n    \"qualification\": \"MD, FACC\",\r\n    \"experience_years\": 15,\r\n    \"license_number\": \"MD123456289\",\r\n    \"hospital_affiliation\": \"City General Hospital\",\r\n    \"consultation_fee\": \"300.00\",\r\n    \"is_available\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/doctors/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"doctors",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Doctor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dr. Michael Johnson\",\r\n    \"email\": \"dr.johnson@hospital.com\",\r\n    \"phone\": \"+1-555-0456\",\r\n    \"specialization\": \"Cardiology\",\r\n    \"qualification\": \"MD, FACC\",\r\n    \"experience_years\": 16,\r\n    \"license_number\": \"MD123456789\",\r\n    \"hospital_affiliation\": \"City General Hospital\",\r\n    \"consultation_fee\": \"275.00\",\r\n    \"is_available\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/doctors/1/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"doctors",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete doctor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dr. Michael Johnson\",\r\n    \"email\": \"dr.johnson@hospital.com\",\r\n    \"phone\": \"+1-555-0456\",\r\n    \"specialization\": \"Cardiology\",\r\n    \"qualification\": \"MD, FACC\",\r\n    \"experience_years\": 16,\r\n    \"license_number\": \"MD123456789\",\r\n    \"hospital_affiliation\": \"City General Hospital\",\r\n    \"consultation_fee\": \"275.00\",\r\n    \"is_available\": true\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/doctors/1/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"doctors",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patient Doctor Mapping",
+			"item": [
+				{
+					"name": "Assign doctor to patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"patient\": 2,\r\n    \"doctor\": 2,\r\n    \"notes\": \"Regular cardiology checkup scheduled for next month.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/mappings/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"mappings",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all patient -doctor mappings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"patient\": 2,\r\n    \"doctor\": 2,\r\n    \"notes\": \"Regular cardiology checkup scheduled for next month.\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/mappings/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"mappings",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove doctor from patient",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"patient\": 2,\r\n    \"doctor\": 2,\r\n    \"notes\": \"Regular cardiology checkup scheduled for next month.\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/mappings/delete/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"mappings",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all doctors assigned to a specific patient",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1ODQ0ODkxLCJpYXQiOjE3NTU4NDQyOTEsImp0aSI6IjA4OTdkNmYxYzM4MTRmYTlhYTUzYjIxOGI4N2MyZjFiIiwidXNlcl9pZCI6Mn0.C1D8olEiuxsb8JSUpHIYsnhTyGulwFa-Nbfe_UxhZyU",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"// if (pm.request.url.path.join(\"/\").includes(\"auth\") === false) {\r",
+					"//      pm.request.headers.add({\r",
+					"//        key: \"Authorization\",\r",
+					"//        value: \"Bearer \" + pm.environment.get(\"access_token\"),\r",
+					"//      });\r",
+					"// }\r",
+					"\r",
+					"// if (pm.response.code === 200 || pm.response.code === 201) {\r",
+					"//      var jsonData = pm.response.json();\r",
+					"//      if (jsonData.tokens && jsonData.tokens.access) {\r",
+					"//        pm.environment.set(\"access_token\", jsonData.tokens.access);\r",
+					"//      }\r",
+					"// }"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "thelink",
+			"value": "http://localhost:8000"
+		},
+		{
+			"key": "baseURL",
+			"value": "https://localhost:8000"
+		}
+	]
+}
